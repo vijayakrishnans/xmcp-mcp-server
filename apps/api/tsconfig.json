@@ -1,0 +1,9 @@
+{
+  "extends": "../../tooling/tsconfig/worker.json",
+  "compilerOptions": {
+    "composite": false,
+    "noEmit": true
+  },
+  "include": ["xmcp-env.d.ts", "xmcp.config.ts", "src/**/*.ts"],
+  "exclude": ["node_modules", "dist", ".xmcp", "worker.js"]
+}

@@ -1,0 +1,39 @@
+// The Worker binds nothing, so this file is committed as-is (no wiring
+// template). Orun deploys with `--env stage` / `--env prod`; wrangler names
+// the Worker xmcp-mcp-server-api-<env> from the top-level name. Each
+// environment's ENVIRONMENT var is what GET /health reports.
+//
+// `xmcp build --cf` writes a wrangler.jsonc of its own only when the app has
+// none, so this one stands; its `main` is src/worker.ts, which serves the
+// worker.js the same build writes (xmcp's Worker) with the health check
+// naming the server and the environment.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "xmcp-mcp-server-api",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true
+  },
+  "vars": {
+    "ENVIRONMENT": "local"
+  },
+  "env": {
+    "dev": {
+      "vars": {
+        "ENVIRONMENT": "dev"
+      }
+    },
+    "stage": {
+      "vars": {
+        "ENVIRONMENT": "stage"
+      }
+    },
+    "prod": {
+      "vars": {
+        "ENVIRONMENT": "prod"
+      }
+    }
+  }
+}

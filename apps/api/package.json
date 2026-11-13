@@ -1,0 +1,30 @@
+{
+  "name": "@app/api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "An xmcp server on a Cloudflare Worker",
+  "type": "module",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "dev": "xmcp dev",
+    "build": "xmcp build --cf && wrangler deploy --dry-run --outdir dist",
+    "preview": "xmcp build --cf && wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src xmcp.config.ts"
+  },
+  "dependencies": {
+    "xmcp": "1.9.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@app/eslint-config": "workspace:*",
+    "@app/tsconfig": "workspace:*",
+    "@cloudflare/workers-types": "^5.20261006.1",
+    "@xmcp-dev/compiler": "1.9.0",
+    "typescript": "^5.8.3",
+    "wrangler": "^4.151.0"
+  }
+}
